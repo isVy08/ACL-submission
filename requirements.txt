@@ -1,0 +1,12 @@
+nltk
+datasets
+wordfreq
+scikit-network
+scipy
+numpy
+torch
+scikit-learn==1.12
+spacy==2.3.5
+sentence-transformers
+transformers
+causal-learn
