@@ -14,14 +14,6 @@ def parse_gpt_response(filename):
 def extract_cot_answer(text):
     text = text.lower()
     answers = []
-
-    text = text.replace('correct answer:', 'correct answer(s):')
-    pattern = r'correct answer(s):(.*\d+?)'
-    match = re.search(pattern, text, re.DOTALL)
-    
-    if match: 
-        string = match.group(1)
-        text = string
     
     for sent in text.split('\n'): 
         sent = sent.strip()
