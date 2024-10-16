@@ -11,17 +11,38 @@ def parse_gpt_response(filename):
             _dict[q] = [int(i.strip()) for i in a.split(',')] 
     return _dict
 
-def extract_qa_answer(text):
+def extract_cot_answer(text):
+    text = text.lower()
+    answers = []
+
+    text = text.replace('correct answer:', 'correct answer(s):')
+    pattern = r'correct answer(s):(.*\d+?)'
+    match = re.search(pattern, text, re.DOTALL)
     
-    if 'incorrect' in text:
-        answers = []
-        for sent in text.split('\n'): 
-            if 'correct' in sent: 
-                ans = re.findall(r"(\d+)", sent)
-                answers.extend(ans)
-    else: 
-        answers = re.findall(r"(\d+)", text)
-    answers = [int(i) for i in set(answers)]
+    if match: 
+        string = match.group(1)
+        text = string
+    
+    for sent in text.split('\n'): 
+        sent = sent.strip()
+        if 'incorrect' not in sent and 'step' not in sent and sent[:2] not in ('1.', '2.'): 
+            ans = re.findall(r"(\d+)", sent)
+            answers.extend(ans)
+    
+    answers = [int(a) for a in answers if int(a) < 6]
+    return answers
+
+def extract_qa_answer(text):
+    text = text.lower()
+    answers = []
+    
+    for sent in text.split('\n'): 
+        sent = sent.strip()
+        if 'incorrect' not in sent and 'step' not in sent: 
+            ans = re.findall(r"(\d+)", sent)
+            answers.extend(ans)
+    
+    answers = [int(a) for a in answers if int(a) < 6]
     return answers
 
 def parse_llama_response(filename, causal=False): 
@@ -32,7 +53,10 @@ def parse_llama_response(filename, causal=False):
         if causal: 
             responses[key] = extract_causal_answer(text)
         else: 
-            responses[key] = extract_qa_answer(text)
+            if 'cot' in filename:
+                responses[key] = extract_cot_answer(text)
+            else:
+                responses[key] = extract_qa_answer(text)
     return responses
 
 def extract_causal_answer(input_string):
@@ -52,25 +76,9 @@ def extract_causal_answer(input_string):
         final_answer = 3
     return [final_answer]
 
-
-def extract_qa_answer(text):
-    text = text.lower()
-    answers = []
-
-    pattern = r'correct answer(.*\d+?)'
-    match = re.search(pattern, text, re.DOTALL)
-    
-    if match: 
-        string = match.group(1)
-        ans = re.findall(r"(\d+)", string)
-        answers.extend(ans)
-        text = string
-    
-    for sent in text.split('\n'): 
-        sent = sent.strip()
-        if 'incorrect' not in sent and 'step' not in sent: 
-            ans = re.findall(r"(\d+)", sent)
-            answers.extend(ans)
-    
-    answers = [int(a) for a in answers if int(a) < 6]
-    return answers
+def jaccard_similarity(str1, str2):
+    list1 = str1.split(' ')
+    list2 = str2.split(' ')
+    s1 = set(list1)
+    s2 = set(list2)
+    return float(len(s1.intersection(s2)) / len(s1.union(s2)))
