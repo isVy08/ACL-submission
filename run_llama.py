@@ -1,6 +1,5 @@
-
 import torch
-import os,sys
+import os,sys,re
 import random
 from tqdm import tqdm
 import pandas as pd
@@ -25,7 +24,7 @@ def send_query_llama(query, model, tokenizer):
 
     return generate_response
 
-def generate_prompt(item): 
+def generate_demo(item): 
     string = f"Here is an example question: {item['question']}\n" if not causal else f"This is an example question: {item['question_wcg']}\n"
     string += 'Choose one or more correct answers out of the following choices:\n'
     for i, choice in enumerate(item['choices']):
@@ -38,17 +37,15 @@ def generate_prompt(item):
     string += 'Now it is your turn to answer the following question.\n'
     return string
 
-
 def generate_cot(question, about): 
-    
     for sent in question.split('.'):
         if 'The story describes an event where' in sent: 
             event = sent.replace('The story describes an event where', '').strip()
             break 
 
-    prompt = f"The event {event} is described by one of the sentences in the story context. First identify that part of the story. Then retrieve the event mentioned in the story that is a corresponding {about}."
+    prompt = f"The event {event} is described by one of the sentences in the story context. First identify that part of the story."
+    prompt += f" Then retrieve the event mentioned in the story that is a corresponding {about}."
     return prompt
-    
 
 def llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type=None, seed=None):
 
@@ -57,9 +54,9 @@ def llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type=None, s
     if seed is not None:
         filename = filename[:16] + f'S{seed}/' + filename[16:]
 
-    if prompt_type == 'causal': # poor performance
-        filename += '-cpt'
-        ause_keys = [key for key in qa_dict if qa_dict[key]['about'] == 'cause']
+    if prompt_type == 'demo': 
+        filename += '-demo'
+        cause_keys = [key for key in qa_dict if qa_dict[key]['about'] == 'cause']
         effect_keys = [key for key in qa_dict if qa_dict[key]['about'] == 'effect']
     
     elif prompt_type == 'cot':
@@ -82,16 +79,15 @@ def llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type=None, s
         for i, choice in enumerate(item['choices']):
             string += f'{i}. {choice}\n'
 
-        if prompt_type == 'causal': 
+        if prompt_type == 'demo': 
             prompt_key = random.choice(cause_keys) if item['about'] == 'cause' else random.choice(effect_keys)
-            prompt = generate_prompt(qa_dict[prompt_key])
+            prompt = generate_demo(qa_dict[prompt_key])
             string = prompt + string
         elif prompt_type == 'cot':
             prompt = generate_cot(item['question'], item['about'])
-            string += "Let’s work this out in a step-by-step way to be sure that we have the right answer.\n"
             string = string + prompt
 
-        
+        string += "Let’s work this out in a step-by-step way to be sure that we have the right answer.\n"
         string += "Provide the answer beginning with 'The correct answer(s):' followed by a list of the indices of the correct answers. Note that there can be multiple correct answers.\n"
         
         
@@ -137,12 +133,10 @@ if task == 'cd':
         llm_for_causalDiscovery(data_file, output_file)
 
 else: 
-    # _name_dict = {'SQSA': 'v1', 'GQSA': 'v1', 'ORIG':'orig'}
-    _name_dict = {'GQSA': 'v1'}
-    prompt_type = 'cot'
+    _name_dict = {'GQSA': 'v1', 'SQSA': 'v1'}
+    prompt_type = 'demo'
     for name, ver in _name_dict.items():
-        for causal in (True, False):
+        for causal in (True,False):
             print('Running QA:', name, 'causal =', causal)
             filename = f'GLUCOSE-QA/{name}/mc-{name}-{ver}'
-            llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type, seed=2)
-            llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type, seed=3)
+            llm_for_causalReasoning(filename, causal, path_to_llama, prompt_type, seed=1)
