@@ -7,7 +7,7 @@ from utils_io import load, write_json, load_json
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 
-graph = ACCESS(root='benchmark_v1',path_to_graph='final_graph.csv', path_to_cluster='final_updated.cluster')    
+graph = ACCESS(root='benchmark',path_to_graph='final_graph.csv', path_to_cluster='final_updated.cluster')    
 
 graph.generate_data_matrix()
 num_stories = len(graph.db.dataset)
@@ -170,7 +170,7 @@ def write_qa_dict(filename, context_dict, gnl_question, gnl_answer):
     count = 1
     _dict = {}
     # Load question bank
-    QB = load_json('GLUCOSE-QA/question-bank-clean.json')
+    QB = load_json('benchmark/GLUCOSE-QA-Question-Bank.json')
     for item in QB:
         for ask_about in ('cause', 'effect'):
             target = 'effect' if ask_about == 'cause' else 'cause'
