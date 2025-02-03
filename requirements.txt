@@ -10,3 +10,6 @@ spacy==2.3.5
 sentence-transformers
 transformers
 causal-learn
+gcastle==1.0.4rc1
+igraph
+leidenalg

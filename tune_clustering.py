@@ -226,7 +226,7 @@ if __name__ == "__main__":
   m = np.load(matrix_path, allow_pickle=True)
   similarity_matrix = m.item()
 
-  method = 'manual'
+  method = 'pivot'
   action = 'merge'
 
   path = f'data/{method}.cluster'
@@ -235,18 +235,11 @@ if __name__ == "__main__":
 
   from utils_similarity import intra_cluster_similarity, event_cluster_similarity
 
-  # print('Initial Evaluation:')
-  # cluster_manager.evaluate()
+  # cluster_manager is updated inpalce
+  tune(cluster_manager, similarity_matrix, inter = True, intra = True)
 
-  if not os.path.isfile(f'data/{method}_tuned.cluster'):
-    print('========= FINE-TUNING =========')
-    tune(cluster_manager, similarity_matrix, inter = True, intra = True)
-    write_pickle(cluster_manager.cluster, f'data/{method}_tuned.cluster')
-  else: 
-     labels = load_pickle(f'data/{method}_tuned.cluster')
-     cluster_manager.update_cluster(labels)
   
-
+  # post-processing for final clustering results
   threshold = 10
   updated_collector = {}
 
@@ -301,7 +294,7 @@ if __name__ == "__main__":
   if len(null_clusters) > 0:
     cluster_manager = null_handler(cluster_manager, null_clusters, action)
 
-  print_cluster(cluster_manager, 'manual')
+  print_cluster(cluster_manager, method)
   write_pickle(cluster_manager.cluster, f'data/{method}_final.cluster')
 
     

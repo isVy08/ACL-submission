@@ -1,9 +1,9 @@
 from tqdm import tqdm
 from utils_io import load_pickle, write_pickle
-from clean import flatten_text
+from utils_data import flatten_text
+import spacy, os
 
 
-import spacy, nltk, os
 nlp = spacy.load("en_core_web_sm")
 
 

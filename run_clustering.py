@@ -1,7 +1,7 @@
 import scipy, os
 import numpy as np
 from tqdm import tqdm
-from utils_io import load_pickle, write_pickle,load_transformer, load
+from utils_io import write_pickle,load_transformer, load
 from utils_similarity import train_load_embeddings, score_phr, generate_input_batch
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
@@ -135,7 +135,7 @@ def do_clustering(method, similarity_matrix, cause_effect, threshold, path):
         write_pickle(clustering.labels_, path)
         
 
-    elif method == 'manual':
+    elif method == 'pivot':
 
         def find_neighbors(center, similarity_matrix, threshold, cause_effect):
             '''
@@ -267,6 +267,3 @@ if __name__ == "__main__":
             sim = inter_cluster_similarity(cluster, similarity_matrix, cluster_manager.cause_effect)
             inter_sim.append(sim)
     print('- Inter cluster similarity: ', sum(inter_sim) / len(inter_sim))
-
-    from finetune import print_cluster 
-    print_cluster(cluster_manager, 'test')

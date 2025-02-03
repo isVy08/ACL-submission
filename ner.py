@@ -12,7 +12,7 @@ nlp = spacy.load("en_core_web_sm")
 Map abstraction to specific mentions
 '''
 
-collector = load_pickle('benchmark/final.cluster')
+collector = load_pickle('benchmark/final_updated.cluster')
 
 db = Glucose()
 N = len(db.dataset)

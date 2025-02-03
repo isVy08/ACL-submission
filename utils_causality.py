@@ -1,5 +1,4 @@
 import re 
-import networkx as nx
 import numpy as np
 from utils_io import load_pickle
 
