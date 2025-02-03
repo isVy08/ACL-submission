@@ -217,8 +217,8 @@ def null_handler(cluster_manager, null_clusters, action):
   
 
 if __name__ == "__main__":
-  import os
-  from utils_io import write_pickle, load_pickle
+  import sys
+  from utils_io import write_pickle
   from cluster import Cluster
 
 
@@ -226,7 +226,7 @@ if __name__ == "__main__":
   m = np.load(matrix_path, allow_pickle=True)
   similarity_matrix = m.item()
 
-  method = 'pivot'
+  method = sys.argv[1]
   action = 'merge'
 
   path = f'data/{method}.cluster'
