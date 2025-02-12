@@ -1,6 +1,6 @@
 # ACCESS
 
-This repo includes the benchmark and codes for reproducing the experiments in the paper **ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning** to be published in NAACL 2025.
+This repo includes the benchmark and codes for reproducing the experiments in the paper **ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning** to appear in NAACL 2025.
 
 ## Dataset
 Our benchmark, including the clusters, causal graph and the GLUCOSE Causal-QA question bank, is released in ``benchmark/``. 
