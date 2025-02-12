@@ -31,3 +31,5 @@ You need to first install `gcastle` and `causal-learn` libraries to run the stat
 ```
 python run_cd_alg.py 25 NOTEARS
 ```
+
+For any inquiries regarding the access to our dataset, please contact tran.vo@monash.edu. 
