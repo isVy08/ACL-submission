@@ -3,14 +3,14 @@
 This repo includes the benchmark and codes for reproducing the experiments in the paper **ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning** to appear in NAACL 2025.
 
 ## Dataset
-Our benchmark, including the clusters, causal graph and the GLUCOSE Causal-QA question bank, is released in ``benchmark/``. 
-
-To examine our ACCESS benchmark, please refer to the following scripts
+To examine our ACCESS construction pipeline, please refer to the following scripts
 * `data_generator.py`
 * `metadata.py`
 * `metagraph.py`. 
 
 The extracted GLUCOSE data and other utilities are provided in this [Google folder](https://drive.google.com/drive/folders/1jUPNJycRQ2wyhs5lx4wRWRPyeaHRzWNE?usp=sharing). 
+
+For inquiries regarding the access to the benchmark, please contact tran.vo@monash.edu.
 
 ## Experiments
 
@@ -32,4 +32,4 @@ You need to first install `gcastle` and `causal-learn` libraries to run the stat
 python run_cd_alg.py 25 NOTEARS
 ```
 
-For any inquiries regarding the access to our dataset, please contact tran.vo@monash.edu. 
+ 
