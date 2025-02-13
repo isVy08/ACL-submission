@@ -1,7 +1,7 @@
 import random
 import numpy as np
 from tqdm import tqdm
-from utils_io import load_pickle
+from utils.io import load_pickle
 
 
 
