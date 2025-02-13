@@ -1,22 +1,20 @@
 # ACCESS
 
-This repo includes the benchmark and codes for reproducing the experiments in the [paper](https://arxiv.org/pdf/2502.08148) **ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning** to appear in NAACL 2025.
+This repo includes the demo benchmark and codes for reproducing the experiments in the paper [**ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning**](https://arxiv.org/pdf/2502.08148) to appear in NAACL 2025.
 
 ## Dataset
 
+**ACCESS** is a benchmark for discovery and reasoning over abstract causal events in everyday life. The folder `benchmark/` provides an extraction of the ACCESS data for demonstrative purposes only.
 
-To examine our ACCESS benchmark, please refer to the following scripts
+To examine our benchmark, please refer to the following scripts
 * `data_generator.py`
 * `metadata.py`
 * `metagraph.py`.
 * `test_graph.py`.
 
 The post-processed GLUCOSE data and other utilities are provided in this [Google folder](https://drive.google.com/drive/folders/1jUPNJycRQ2wyhs5lx4wRWRPyeaHRzWNE?usp=sharing). 
-
-
-The folder `benchmark/` provides only an extraction of the ACCESS data to demonstrate how it should be used.
-
-**For access to the full benchmark, please contact tran.vo@monash.edu.**
+ 
+**For inquires to access the full benchmark, please send a request to tran.vo@monash.edu.**
 
 
 ## Experiments
