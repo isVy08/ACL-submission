@@ -14,7 +14,7 @@ To examine our benchmark, please refer to the following scripts
 
 The post-processed GLUCOSE data and other utilities are provided in this [Google folder](https://drive.google.com/drive/folders/1jUPNJycRQ2wyhs5lx4wRWRPyeaHRzWNE?usp=sharing). 
  
-**For inquires to access the full benchmark, please send a request to tran.vo@monash.edu.**
+**For requests to access the full benchmark, please contact Vy Vo at tran[dot]vo[at]monash[dot]edu.**
 
 
 ## Experiments
