@@ -8,7 +8,7 @@ from collections import Counter
 '''
 Load the ground-truth graph:
 ''' 
-graph = ACCESS(root='benchmark',path_to_graph='final_graph.csv', path_to_cluster='final.cluster')
+graph = ACCESS(root='benchmark',path_to_graph='final_graph.csv', path_to_cluster='final_cluster.csv')
 
 graph.generate_data_matrix()
 X = graph.X

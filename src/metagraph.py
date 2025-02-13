@@ -14,22 +14,32 @@ from collections import defaultdict
 '''
 Meta information of the ground-truth causal graph
 '''
+
 class ACCESS: 
     
     def __init__(self, root='benchmark/', path_to_graph='final_graph.csv',
-                 path_to_cluster=None):
+                 path_to_cluster='final_cluster.csv'):
         
         self.collector = None 
         self.topic_ids = None
         if path_to_cluster is not None:
-            self.collector = load_pickle(os.path.join(root, path_to_cluster))
+            df = pd.read_csv(os.path.join(root, path_to_cluster))
+            collector = {}
+            for row in df.iterrows():
+                topic_index = row[1]['Topic Index']
+                topic = row[1]['Topic']
+                if topic_index not in collector:
+                    collector[topic_index] = {'topic': topic, 'cluster': []}
+                collector[topic_index]['cluster'].append(row[1]['Events'])
+
+            self.collector = collector
             self.topic_ids = list(self.collector.keys())
 
         # Load the ground-truth graph:
         df = pd.read_csv(os.path.join(root, path_to_graph))
 
         # Convert the dataframe to adjacency matrix
-        self.cause_effect_list = []
+        self.cause_effect_list = set()
         nodes = set() 
         abstractions = {}
         self.occurences = []
@@ -50,22 +60,22 @@ class ACCESS:
             nodes.add(node_i)
             nodes.add(node_j)
             if relation == 'C':
-                self.cause_effect_list.append((node_i, node_j))
+                self.cause_effect_list.add((node_i, node_j))
             elif relation == 'E':
-                self.cause_effect_list.append((node_j, node_i))
+                self.cause_effect_list.add((node_j, node_i))
             self.occurences.append(node_i)
             self.occurences.append(node_j)
 
-
+        self.cause_effect_list = list(self.cause_effect_list)
         self.nodes = list(nodes)
         self.A = self.to_adj()
         self.G = nx.DiGraph(self.A)
         print('Is the graph a DAG?', nx.is_directed_acyclic_graph(self.G))
         # nx.find_cycle(G, orientation="original")
         if self.collector is None: 
-            self.abstractions = [abstractions[node] for node in nodes]
+            self.abstractions = [abstractions[node] for node in self.nodes]
         else:
-            self.abstractions = [self.collector[node]['topic'].replace('topic : ', '') for node in nodes]
+            self.abstractions = [self.collector[node]['topic'].replace('topic : ', '') for node in self.nodes]
 
     def generate_data_matrix(self):
         '''
@@ -73,7 +83,7 @@ class ACCESS:
         '''
 
         from metadata import Glucose
-        from utils.causality import return_story_loc
+        from utils_causality import return_story_loc
 
         self.db = Glucose()
         N = len(self.db.dataset)
