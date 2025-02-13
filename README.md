@@ -50,6 +50,6 @@ ACCESS can be used to evaluate LLMs on the following tasks:
   - refer to `generate_causal_pairs.py` for how to create a test set of non-contextual causal relations from ACCESS.
 
 * **Causal QA reasoning:**
-  - refer to `generate_causal_qa.py` for how to automatically construct the `GLUCOSE` QA dataset. 
-  - Please also refer to `benchmark/` for an example. Note that the `GLUCOSE` question bank released in ACCESS has been subjected to human validation for true causality. 
+  - refer to `generate_causal_qa.py` for how to automatically construct the `GLUCOSE` QA dataset and `benchmark/` for an example.
+  - note that the `GLUCOSE` question bank released in ACCESS has been subjected to human validation for true causality. 
  
