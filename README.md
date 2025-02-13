@@ -3,14 +3,21 @@
 This repo includes the benchmark and codes for reproducing the experiments in the paper **ACCESS: A Benchmark for Abstract Causal Event Discovery and Reasoning** to appear in NAACL 2025.
 
 ## Dataset
-To examine our ACCESS construction pipeline, please refer to the following scripts
+
+
+To examine our ACCESS benchmark, please refer to the following scripts
 * `data_generator.py`
 * `metadata.py`
-* `metagraph.py`. 
+* `metagraph.py`.
 
 The extracted GLUCOSE data and other utilities are provided in this [Google folder](https://drive.google.com/drive/folders/1jUPNJycRQ2wyhs5lx4wRWRPyeaHRzWNE?usp=sharing). 
 
-For inquiries regarding the access to the benchmark, please contact tran.vo@monash.edu.
+
+You need to create the directory `benchmark/` and add the files `final_graph.csv` and `final_cluster.csv`. 
+
+**For inquiries regarding access to the benchmark, please contact tran.vo@monash.edu.**
+
+
 
 ## Experiments
 
