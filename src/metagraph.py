@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import networkx as nx
-from utils.io import load_pickle
 from collections import defaultdict
 
 
