@@ -1,11 +1,14 @@
+import sys
+import warnings
 import scipy, os
 import numpy as np
 from tqdm import tqdm
-from utils_io import write_pickle,load_transformer, load
-from utils_similarity import train_load_embeddings, score_phr, generate_input_batch
-from sklearn.metrics.pairwise import cosine_similarity
-import sys
-import warnings
+from cluster import Cluster
+from sklearn import metrics
+from utils.io import write_pickle,load_transformer, load
+from utils.similarity import train_load_embeddings, score_phr, generate_input_batch, inter_cluster_similarity
+
+
 
 warnings.filterwarnings("ignore")
 
@@ -25,7 +28,7 @@ def extract_scores(corr_type, event_list, cause_effect, file_path, root='data'):
     
     
     for i in tqdm(range(N)):
-        sims = cosine_similarity(embs[i:i+1], embs)[0, ]
+        sims = metrics.cosine_similarity(embs[i:i+1], embs)[0, ]
         if cause_effect is not None:
             ce = cause_effect[i]['causes'].union(cause_effect[i]['effects'])
         if corr_type == 'phr':
@@ -195,15 +198,11 @@ def do_clustering(method, similarity_matrix, cause_effect, threshold, path):
 
 if __name__ == "__main__":
 
-    import os
-    from cluster import Cluster
-    from sklearn import metrics
-    from utils_similarity import inter_cluster_similarity
+    
     
     method = sys.argv[1]
     cluster_manager = Cluster()
     
-    # method = list(map(str, method.strip('[]').split(',')))
 
     root = 'data'
 

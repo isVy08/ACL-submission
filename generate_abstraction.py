@@ -1,6 +1,6 @@
 from metadata import Glucose
-from utils_io import load_pickle
-from utils_causality import get_id, get_text
+from utils.io import load_pickle
+from utils.causality import get_id, get_text
 from tqdm import tqdm 
 import pandas as pd
 import spacy
@@ -12,7 +12,7 @@ nlp = spacy.load("en_core_web_sm")
 Map abstraction to specific mentions
 '''
 
-collector = load_pickle('benchmark/final_updated.cluster')
+collector = load_pickle('benchmark/final.cluster')
 
 db = Glucose()
 N = len(db.dataset)

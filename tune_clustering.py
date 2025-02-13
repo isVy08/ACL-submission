@@ -1,7 +1,11 @@
+import sys
 import random
-from tqdm import tqdm
 import numpy as np 
-from utils_similarity import event_cluster_similarity
+from tqdm import tqdm
+from cluster import Cluster
+from utils.io import write_pickle
+from utils.similarity import intra_cluster_similarity, event_cluster_similarity
+
 
   
 def remove_self_loop(cluster, similarity_matrix, cause_effect_dict):
@@ -217,10 +221,6 @@ def null_handler(cluster_manager, null_clusters, action):
   
 
 if __name__ == "__main__":
-  import sys
-  from utils_io import write_pickle
-  from cluster import Cluster
-
 
   matrix_path = 'data/similarity_matrix.npy'
   m = np.load(matrix_path, allow_pickle=True)
@@ -233,7 +233,7 @@ if __name__ == "__main__":
   cluster_manager = Cluster()
   cluster_manager.load_cluster(path)
 
-  from utils_similarity import intra_cluster_similarity, event_cluster_similarity
+  
 
   # cluster_manager is updated inpalce
   tune(cluster_manager, similarity_matrix, inter = True, intra = True)

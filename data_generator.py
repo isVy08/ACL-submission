@@ -1,6 +1,6 @@
 from tqdm import tqdm
-from utils_io import load_pickle, write_pickle
-from utils_data import flatten_text
+from utils.io import load_pickle, write_pickle
+from utils.data import flatten_text
 import spacy, os
 
 

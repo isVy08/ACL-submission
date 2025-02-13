@@ -81,7 +81,7 @@ def train_load_embeddings(path, events=None):
   else:
     assert events is not None, 'Event data is required!'
     print('Extracting embeddings ...')
-    from sentence_transformers import SentenceTransformer, util
+    from sentence_transformers import SentenceTransformer
     model = SentenceTransformer('all-MiniLM-L6-v2', cache_folder='models')
     print("Encode the corpus. This might take a while")
     corpus_embeddings = model.encode(events, batch_size=256, show_progress_bar=True, convert_to_tensor=False)

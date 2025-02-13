@@ -1,6 +1,6 @@
 import re 
 import numpy as np
-from utils_io import load_pickle
+from utils.io import load_pickle
 
 def get_id(sent):
     p = re.compile(r'([0-9]+)+')
