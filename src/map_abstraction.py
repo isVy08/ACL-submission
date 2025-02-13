@@ -1,6 +1,6 @@
 from metadata import Glucose
-from utils.io import load_pickle
 from utils.causality import get_id, get_text
+from metagraph import ACCESS
 from tqdm import tqdm 
 import pandas as pd
 import spacy
@@ -12,12 +12,13 @@ nlp = spacy.load("en_core_web_sm")
 Map abstraction to specific mentions
 '''
 
-collector = load_pickle('benchmark/final.cluster')
+graph = ACCESS(root='../benchmark',path_to_graph='final_graph.csv', path_to_cluster='final_cluster.csv')
+
 
 db = Glucose()
 N = len(db.dataset)
-D = len(collector)
-topic_ids = list(collector.keys())
+D = len(graph.collector)
+topic_ids = list(graph.collector.keys())
 
 def count_overlap(text_a, text_b, excluded={'person', 'a', 'another', 'something', 'someone', 'be'}):
     tokens_a = set(text_a.split(' '))
@@ -42,8 +43,8 @@ level2 = []
 level3 = []
 for i in tqdm(range(D)):
     tid = topic_ids[i]
-    cluster = collector[tid]['cluster']
-    topic = collector[tid]['topic']
+    cluster = graph.collector[tid]['cluster']
+    topic = graph.collector[tid]['topic']
     topic = topic.replace('topic : ', '')
     
     for sent in cluster:

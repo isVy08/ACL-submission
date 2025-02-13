@@ -21,13 +21,15 @@ The post-processed GLUCOSE data and other utilities are provided in this [Google
 
 ### 1. Clustering for Abstract Event Extraction
 
-To reproduce the automatic clustering results, you need to create the data directory `mkdir data`, then download to `data/` the related objects from the above folder. 
+To do automatic clustering, you first need to create the data directory `mkdir data`, then download to `data/` the related objects from the above folder. 
 Then run the following command lines: 
 
 ```
 python run_clustering.py pivot
 python tune_clustering.py pivot
 ```
+
+Other algorithms for ablation are also provided, e.g., `louvain`, `leiden`, `optics`.
 
 ### 2. Statistical Structure Learning
 
@@ -37,4 +39,14 @@ You need to first install `gcastle` and `causal-learn` libraries to run the stat
 python run_cd_alg.py 25 NOTEARS
 ```
 
+### 3. GLUCOSE QA with LLMs
+
+ACCESS can be used to evaluate LLMs on the following tasks:  
+
+a) mapping ACCESS abstractions to mentions in GLUCOSE: refer to `map_abstraction.py`
+
+b) causal discovery: use ACCESS to `generate_causal_pairs.py`.
+
+c) causal QA reasoning: refer to `generate_causal_qa.py` for how to construct the GLUCOSE QA dataset. 
+Please refer to `benchmark/` for an example. Note that the data released in our benchmark has been subjected to human validation for true causality. 
  

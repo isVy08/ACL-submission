@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 def construct_pairs(save_file):
-    df = pd.read_csv("benchmark/final_graph.csv")
+    df = pd.read_csv("../benchmark/final_graph.csv")
     clusters = []
     annotated_cause_effect_pairs = {}
     for _, row in df.iterrows():
