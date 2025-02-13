@@ -1,7 +1,6 @@
 import os
 from metagraph import ACCESS
-os.makedirs('benchmark/', exis_ok=True)
-graph = ACCESS(root='benchmark',path_to_graph='final_graph.csv', path_to_cluster='final_cluster.csv')
+graph = ACCESS(root='../benchmark',path_to_graph='final_graph.csv', path_to_cluster='final_cluster.csv')
 
 
 graph.get_subgraph_info()

@@ -16,7 +16,7 @@ Meta information of the ground-truth causal graph
 
 class ACCESS: 
     
-    def __init__(self, root='benchmark/', path_to_graph='final_graph.csv',
+    def __init__(self, root='../benchmark/', path_to_graph='final_graph.csv',
                  path_to_cluster='final_cluster.csv'):
         
         self.collector = None 

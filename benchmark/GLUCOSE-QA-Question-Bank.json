@@ -1,0 +1,66 @@
+[
+    {
+        "id": 14,
+        "context": "The boy got scared. He looked for his mom. He could not find his mom. He screamed out for his mom. His mom came running.",
+        "cause": [
+            "a person scream for another person",
+            "a person screams for another person",
+            "the boy screams for his mom",
+            [
+                "The boy got scared",
+                "He looked for his mom",
+                "He could not find his mom",
+                "He screamed out for his mom",
+                "His mom came running"
+            ],
+            [
+                0,5
+            ]
+        ],
+        "effect": [
+            "a person run towards another person",
+            "another person comes running toward a person",
+            "his mom runs toward her son",
+            [
+                "The boy got scared",
+                "He could not find his mom",
+                "His mom came running"
+            ],
+            [
+                0
+            ]
+        ]
+    },
+    {
+        "id": 17,
+        "context": "Kelly heard Something in her yard. She did not know what it was. She went to check what it was. It turned out to be music. The music was amazing.",
+        "cause": [
+            "a person hear something",
+            "a person hears something in a place",
+            "kelly hears something in the yard",
+            [
+                "Kelly heard Something in her yard",
+                "She did not know what it was",
+                "It turned out to be music",
+                "The music was amazing"
+            ],
+            [
+                0
+            ]
+        ],
+        "effect": [
+            "a person check on something (or a place)",
+            "a person checks a place",
+            "she goes above check",
+            [
+                "She did not know what it was",
+                "She went to check what it was",
+                "It turned out to be music",
+                "The music was amazing"
+            ],
+            [
+                0
+            ]
+        ]
+    }
+]
