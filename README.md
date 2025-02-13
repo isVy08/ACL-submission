@@ -39,14 +39,17 @@ You need to first install `gcastle` and `causal-learn` libraries to run the stat
 python run_cd_alg.py 25 NOTEARS
 ```
 
-### 3. GLUCOSE QA with LLMs
+### 3. Causal Reasoning with LLMs
 
 ACCESS can be used to evaluate LLMs on the following tasks:  
 
-a) mapping ACCESS abstractions to mentions in GLUCOSE: refer to `map_abstraction.py`
+* **Abstract event identification:**
+  - refer to `map_abstraction.py` for how to map ACCESS abstractions to mentions in `GLUCOSE`.
 
-b) causal discovery: use ACCESS to `generate_causal_pairs.py`.
+* **Causal discovery:**
+  - refer to `generate_causal_pairs.py` for how to create a test set of non-contextual causal relations from ACCESS.
 
-c) causal QA reasoning: refer to `generate_causal_qa.py` for how to construct the GLUCOSE QA dataset. 
-Please refer to `benchmark/` for an example. Note that the data released in our benchmark has been subjected to human validation for true causality. 
+* **Causal QA reasoning:**
+  - refer to `generate_causal_qa.py` for how to automatically construct the `GLUCOSE` QA dataset. 
+  - Please also refer to `benchmark/` for an example. Note that the `GLUCOSE` question bank released in ACCESS has been subjected to human validation for true causality. 
  
