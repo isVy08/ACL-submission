@@ -204,9 +204,7 @@ if __name__ == "__main__":
     cluster_manager = Cluster()
     
 
-    root = 'data'
-
-    path = f'{root}/{method}.cluster'
+    path = f'data/{method}.cluster'
     
     # both cosine and phr scores are symmetric
     m = load_scores('similarity', cluster_manager.event_list, cluster_manager.cause_effect, root=root)
