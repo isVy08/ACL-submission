@@ -73,7 +73,7 @@ class ACCESS:
         '''
 
         from metadata import Glucose
-        from utils_causality import return_story_loc
+        from utils.causality import return_story_loc
 
         self.db = Glucose()
         N = len(self.db.dataset)
